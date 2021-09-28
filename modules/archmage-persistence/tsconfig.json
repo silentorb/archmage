@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.packages.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "../../dist/archmage-persistence",
+  },
+  "references": [
+    {"path": "../common"}
+  ]
+}

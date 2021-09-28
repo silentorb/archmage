@@ -1,0 +1,9 @@
+.idea
+.vscode
+node_modules
+dist
+yarn-*
+tsconfig.tsbuildinfo
+.DS_Store
+.env
+.nyc_output
