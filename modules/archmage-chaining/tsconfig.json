@@ -3,8 +3,12 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "../../dist/archmage-chaining",
+    "tsBuildInfoFile": "../../dist/archmage-chaining.tsbuildinfo",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "references": [
-    {"path": "../common"}
+    {"path": "../archmage-common"},
+    {"path": "../archmage-persistence"}
   ]
 }

@@ -3,9 +3,10 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "../../dist/archmage-syncing",
+    "tsBuildInfoFile": "../../dist/archmage-syncing.tsbuildinfo"
   },
   "references": [
-    {"path": "../common"},
-    {"path": "../chaining"}
+    {"path": "../archmage-common"},
+    {"path": "../archmage-chaining"}
   ]
 }

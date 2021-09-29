@@ -1,9 +1,9 @@
 {
   "references": [
-    {"path": "./modules/archmage-auth"},
-    {"path": "./modules/archmage-chaining"},
     {"path": "./modules/archmage-common"},
     {"path": "./modules/archmage-persistence"},
+    {"path": "./modules/archmage-auth"},
+    {"path": "./modules/archmage-chaining"},
     {"path": "./modules/archmage-syncing"}
   ],
   "files": [],

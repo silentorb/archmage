@@ -3,8 +3,9 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "../../dist/archmage-auth",
+    "tsBuildInfoFile": "../../dist/archmage-auth.tsbuildinfo"
   },
   "references": [
-    {"path": "../common"}
+    {"path": "../archmage-common"}
   ]
 }
