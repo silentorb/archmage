@@ -2,7 +2,9 @@ import { Hash } from 'archmage-common'
 
 export interface CommonBlock {
   hash: Hash
-  previous?: Hash
   format: number
+  index: number
+  items: Hash
+  previous?: Hash
   timestamp: Date
 }

@@ -1,0 +1,24 @@
+{
+  "name": "integration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "../../dist/integration/index",
+  "scripts": {
+    "tsc": "node_modules/.bin/tsc"
+  },
+  "private": true,
+  "dependencies": {
+    "@types/node": "^16.10.1",
+    "archmage-chaining": "1.0.0",
+    "archmage-common": "1.0.0",
+    "archmage-persistence": "1.0.0",
+    "typescript": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.22",
+    "@types/mocha": "^9.0.0",
+    "chai": "^4.3.4",
+    "mocha": "^9.1.2",
+    "nyc": "^15.1.0"
+  }
+}

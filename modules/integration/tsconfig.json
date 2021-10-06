@@ -2,8 +2,8 @@
   "extends": "../../tsconfig.packages.json",
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "../../dist/archmage-syncing",
-    "tsBuildInfoFile": "../../dist/archmage-syncing.tsbuildinfo"
+    "outDir": "../../dist/integration",
+    "tsBuildInfoFile": "../../dist/integration.tsbuildinfo"
   },
   "references": [
     {"path": "../archmage-common"},
