@@ -15,8 +15,7 @@ export function stringToBuffer(value: string) {
     buffer.writeUInt16BE(0, 0)
     return buffer
   } else if (typeof value !== 'string') {
-    const buffer = Buffer.alloc(0)
-    return buffer
+    return Buffer.alloc(0)
   } else {
     const buffer = Buffer.alloc(2 + value.length)
     buffer.writeUInt16BE(value.length, 0)

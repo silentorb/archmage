@@ -1,10 +1,20 @@
 import { EntitySchema, ObjectType } from 'typeorm'
 import { ColumnMetadata } from 'typeorm/metadata/ColumnMetadata'
-import { bufferFromStringArray, hashString, stringToBuffer } from 'archmage-common'
 import { ColumnType } from 'typeorm/driver/types/ColumnTypes'
-import { BaseHashRecord, Database } from 'archmage-persistence'
+import { bufferFromStringArray, hashString, stringToBuffer } from '../common'
+import { BaseHashRecord, Database } from '../persistence'
+import 'reflect-metadata'
+import { getMetadataValue } from './metadata'
 
-export const doNotHash = 'doNotHash'
+const doNotHashMetadataKey = Symbol('doNotHash')
+
+export function DoNotHash() {
+  return Reflect.metadata(doNotHashMetadataKey, true)
+}
+
+export function getDoNotHash(type: any, property: string) {
+  return getMetadataValue(type, doNotHashMetadataKey, property)
+}
 
 function getColumnType(column: ColumnMetadata): string {
   return typeof column.type === 'string' ? column.type : column.type.name.toLowerCase()
@@ -79,7 +89,7 @@ export function newHashingMetadata<T>(db: Database, table: ObjectType<T> | Entit
 }
 
 export const hashRecordFromColumns = <T>(columns: ColumnMetadata[]) => (record: BaseHashRecord<T>) => {
-  const filteredColumns = columns.filter(c => c.comment != doNotHash)
+  const filteredColumns = columns.filter(c => !getDoNotHash(c.target, c.propertyName))
   const buffers = filteredColumns
     .map(column => bufferFromColumnValue(column, (record as any)[column.propertyName]))
   const buffer = Buffer.concat(buffers)

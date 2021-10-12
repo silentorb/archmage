@@ -1,6 +1,6 @@
-import { Hash } from 'archmage-common'
 import { Column, ColumnOptions, CreateDateColumn, Entity, PrimaryColumn, ValueTransformer } from 'typeorm'
 import { CommonBlock } from './types'
+import { DoNotHash } from './serialization'
 
 const smallInt: ColumnOptions = { type: 'smallint', unsigned: true }
 
@@ -22,13 +22,14 @@ const numeric: ColumnOptions = {
 
 // The created column should be directly added instead of inherited to a table if `created` should be part of the hash
 export abstract class Created {
+  @DoNotHash()
   @CreateDateColumn()
   createdAt!: Date
 }
 
 export abstract class HashedTable extends Created {
   @PrimaryColumn()
-  hash!: Hash
+  hash!: string // Hash
 
   @Column({ type: 'smallint', unsigned: true, default: 1 })
   format!: number
@@ -37,7 +38,7 @@ export abstract class HashedTable extends Created {
 @Entity()
 export class HashLists extends Created {
   @PrimaryColumn()
-  list!: Hash
+  list!: string // Hash
 
   @PrimaryColumn()
   item!: string
@@ -45,15 +46,19 @@ export class HashLists extends Created {
 
 @Entity()
 export abstract class Blocks extends HashedTable implements CommonBlock {
-  @Column('bigint')
+  @Column('integer')
   index!: number
 
   @Column()
-  items!: Hash
+  items!: string // Hash
 
   @Column({ nullable: true })
-  previous?: Hash
+  previous?: string // Hash
 
   @Column()
   timestamp: Date
 }
+
+export const chainingTables: any[] = [
+  Blocks,
+]

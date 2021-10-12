@@ -7,5 +7,8 @@
     "experimentalDecorators": true,
     "composite": true,
     "sourceMap": true
-  }
+  },
+  "include": [
+    "./src/**/*",
+  ]
 }

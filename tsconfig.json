@@ -1,10 +1,8 @@
 {
   "references": [
-    {"path": "./modules/archmage-common"},
-    {"path": "./modules/archmage-persistence"},
-    {"path": "./modules/archmage-auth"},
-    {"path": "./modules/archmage-chaining"},
-    {"path": "./modules/archmage-syncing"}
+    {"path": "./packages/archmage-auth"},
+    {"path": "./packages/archmage-chaining"},
+    {"path": "./packages/archmage-syncing"}
   ],
   "files": [],
   "include": [],

@@ -2,13 +2,14 @@
   "name": "archmage-chaining",
   "version": "0.2.0",
   "description": "",
-  "main": "../../dist/archmage-chaining/index",
+  "main": "src/index",
   "scripts": {
     "tsc": "node_modules/.bin/tsc"
   },
   "private": true,
   "dependencies": {
     "@types/node": "^16.10.1",
+    "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.37",
     "typescript": "^4.4.3"
   }

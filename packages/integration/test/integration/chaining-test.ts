@@ -1,31 +1,22 @@
 import { assert } from 'chai'
-import { Database } from 'archmage-persistence'
+import { Blocks, chainingTables, Database, emptyArrayHash, hashRecord } from 'archmage-chaining'
+import { initializeTestDatabase, loadDotEnv, resetDatabase, shutdownIntegrationTest } from '../src'
 
-describe('sample-test', function() {
+describe('chaining-test', function () {
   this.timeout(15000)
-  let server: any
   let db: Database
 
-  before(async function() {
-    db = await initializeTestDatabase()
-    server = await startTestApi()
+  before(async function () {
+    loadDotEnv()
+    db = await initializeTestDatabase(chainingTables)
   })
 
-  beforeEach(async function() {
+  beforeEach(async function () {
     await resetDatabase(db)
   })
 
-  after(function() {
-    return shutdownIntegrationTest(server, db)
+  after(function () {
+    return shutdownIntegrationTest(db)
   })
 
-  // Test cases here...
 })
-
-// Another file:
-
-
-export async function shutdownIntegrationTest(server: any, db: Database) {
-  if (server) await new Promise(r => server.close(r))
-  if (db) await db.close()
-}

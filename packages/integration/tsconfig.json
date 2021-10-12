@@ -1,11 +1,16 @@
 {
   "extends": "../../tsconfig.packages.json",
   "compilerOptions": {
-    "rootDir": "src",
     "outDir": "../../dist/integration",
-    "tsBuildInfoFile": "../../dist/integration.tsbuildinfo"
+    "tsBuildInfoFile": "../../dist/integration.tsbuildinfo",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "references": [
     {"path": "../archmage-chaining"}
+  ],
+  "include": [
+    "./src/**/*",
+    "./test/src/**/*"
   ]
 }

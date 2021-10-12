@@ -1,4 +1,4 @@
-import { Hash } from 'archmage-common'
+import { Hash } from '../common'
 
 export interface CommonBlock {
   hash: Hash
