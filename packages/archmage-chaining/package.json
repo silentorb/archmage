@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/index",
   "scripts": {
-    "tsc": "node_modules/.bin/tsc"
+    "tsc": "node_modules/.bin/tsc",
+    "post-build": "node post-build.js"
   },
   "private": true,
   "dependencies": {

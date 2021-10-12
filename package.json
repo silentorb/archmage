@@ -2,7 +2,7 @@
   "name": "archmage",
   "private": true,
   "scripts": {
-    "build": "./node_modules/.bin/tsc --build",
+    "build": "./node_modules/.bin/tsc --build && node packages/archmage-chaining/post-build.js",
     "start": "node modules/all/dist/entry/main"
   },
   "workspaces": [
