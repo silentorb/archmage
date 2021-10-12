@@ -1,8 +1,8 @@
 import { ObjectType } from 'typeorm'
-import { bufferFromStringArray, Hash, hashString } from 'archmage-common'
-import { Database, insertImmutable } from 'archmage-persistence'
 import { hashRecord } from './serialization'
 import { HashLists } from './tables'
+import { bufferFromStringArray, Hash, hashString } from '../common'
+import { Database, insertImmutable } from '../persistence'
 
 export type WithoutHash<T> = Omit<T, 'hash'>
 

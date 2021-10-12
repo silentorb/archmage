@@ -1,14 +1,15 @@
 {
-  "name": "archmage-common",
-  "version": "1.0.0",
+  "name": "archmage-chaining",
+  "version": "0.2.0",
   "description": "",
-  "main": "../../dist/archmage-common/index",
+  "main": "../../dist/archmage-chaining/index",
   "scripts": {
     "tsc": "node_modules/.bin/tsc"
   },
   "private": true,
   "dependencies": {
     "@types/node": "^16.10.1",
+    "typeorm": "^0.2.37",
     "typescript": "^4.4.3"
   }
 }

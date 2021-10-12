@@ -1,14 +1,11 @@
 {
-  "extends": "../../tsconfig.packages.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "../../dist/archmage-chaining",
     "tsBuildInfoFile": "../../dist/archmage-chaining.tsbuildinfo",
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
-  },
-  "references": [
-    {"path": "../archmage-common"},
-    {"path": "../archmage-persistence"}
-  ]
+    "experimentalDecorators": true,
+    "composite": true,
+    "sourceMap": true
+  }
 }

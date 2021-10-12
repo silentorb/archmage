@@ -6,8 +6,6 @@
     "tsBuildInfoFile": "../../dist/integration.tsbuildinfo"
   },
   "references": [
-    {"path": "../archmage-common"},
-    {"path": "../archmage-chaining"},
-    {"path": "../archmage-persistence"}
+    {"path": "../archmage-chaining"}
   ]
 }

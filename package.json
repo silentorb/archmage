@@ -1,16 +1,17 @@
 {
+  "name": "archmage",
   "private": true,
   "scripts": {
     "build": "./node_modules/.bin/tsc --build",
     "start": "node modules/all/dist/entry/main"
   },
   "workspaces": [
-    "modules/*"
+    "packages/*"
   ],
   "devDependencies": {
     "dotenv": "^8.6.0",
     "tslint": "^5.20.0",
     "tslint-config-prettier": "^1.18.0"
   },
-  "version": "2.27.0"
+  "version": "0.1.0"
 }
