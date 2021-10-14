@@ -14,6 +14,7 @@ export function insertMany<T>(table: ObjectType<T>): (db: Database, records: T[]
       .getRepository(table)
       .createQueryBuilder()
       .insert()
+      .values(records)
       .execute()
   }
 }

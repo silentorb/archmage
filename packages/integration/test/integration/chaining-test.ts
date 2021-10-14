@@ -57,8 +57,8 @@ describe('chaining-test', function () {
       const hashItems = await getManyBy(HashLists)(db)
       assert.strictEqual(hashItems.length, 2)
 
-      // const transactions = await getManyBy(Transactions)(db)
-      // assert.strictEqual(transactions.length, 2)
+      const transactions = await getManyBy(Transactions)(db)
+      assert.strictEqual(transactions.length, 2)
     })
   })
 })

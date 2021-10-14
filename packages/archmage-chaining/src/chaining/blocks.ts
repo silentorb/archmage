@@ -3,7 +3,7 @@ import { getListHash, insertHashedRecord, insertHashListWithHash } from './writi
 import {
   Database,
   executeTransaction, getManyBy,
-  getSingleBy, insertSingle,
+  getSingleBy, insertMany, insertSingle,
   newQueryBuilder,
   Operation,
   queryStringValues
@@ -56,23 +56,6 @@ export async function prepareNextBlock(db: Database, content: Hash, timestamp: D
   }
 }
 
-// export function copyRecords(db: Database, source: ObjectType<any>, destination: ObjectType<any>, hashes: string[]) {
-//   return newQueryBuilder(db, destination)
-//     // .insert()
-//     // .values(query =>
-//     //   query
-//     //     .select(source)
-//     //     // .where()
-//     // )
-//     // .execute()
-//     .insert()
-//     .into(destination)
-//     // .select()
-//     .from(source, 'source')
-//     .where(`"${db.getRepository(source).metadata.tableName}"."hash" in (:...hashes)`, { hashes: hashes })
-//     .execute()
-// }
-
 export type TablePair = [ObjectType<any>, ObjectType<any>]
 
 export async function integratePendingItems(db: Database, tablePairs: TablePair[]) {
@@ -81,12 +64,19 @@ export async function integratePendingItems(db: Database, tablePairs: TablePair[
   const hashes = await getHashesFromTables(tableNames)(db)
   if (hashes.length == 0) return
 
-  // const recordGroups = Promise.all(pendingTables.map(async table => [table, await getManyBy(table)]))
+  const recordGroups: [ObjectType<any>, HashedTable[]][] =
+    await Promise.all(tablePairs
+      .map(async table =>
+        [table[1], await getManyBy(table[0])(db)] as [ObjectType<any>, HashedTable[]]
+      )
+    )
 
   const content = getListHash(hashes)
 
-  // const itemCopies: Operation[] = tablePairs
-  //   .map(pair => db => copyRecords(db, pair[0], pair[1], hashes))
+  const itemCopies: Operation[] = recordGroups
+    .map(([destination, records]) =>
+      db => insertMany(destination)(db, records.filter(r => hashes.includes(r.hash)))
+    )
 
   const hashListInserts: Operation = db => insertHashListWithHash(db, content, hashes)
   const block = await prepareNextBlock(db, content)
@@ -101,7 +91,7 @@ export async function integratePendingItems(db: Database, tablePairs: TablePair[
     )
 
   const statements =
-    []
+    itemCopies
       .concat([blockInsert, hashListInserts])
       .concat(deletions)
 
