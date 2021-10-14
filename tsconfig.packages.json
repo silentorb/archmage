@@ -1,6 +1,13 @@
 {
   "compilerOptions": {
+    "module": "commonjs",
     "composite": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "strict": true,
+    "newLine": "lf",
+    "target": "ES2019",
+    "lib": [
+      "es2019"
+    ]
   }
 }

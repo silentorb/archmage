@@ -1,12 +1,11 @@
 {
+  "extends": "../../tsconfig.packages.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "../../dist/archmage-chaining/lib",
     "tsBuildInfoFile": "../../dist/archmage-chaining.tsbuildinfo",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "composite": true,
-    "sourceMap": true
   },
   "include": [
     "./src/**/*"

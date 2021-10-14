@@ -2,8 +2,10 @@ import { Blocks, HashedTable } from './schema'
 import { getListHash, insertHashedRecord, insertHashListWithHash } from './writing'
 import {
   Database,
-  executeTransaction, getManyBy,
-  getSingleBy, insertMany, insertSingle,
+  executeTransaction,
+  getManyBy,
+  insertMany,
+  insertSingle,
   newQueryBuilder,
   Operation,
   queryStringValues
@@ -82,9 +84,9 @@ export async function integratePendingItems(db: Database, tablePairs: TablePair[
   const block = await prepareNextBlock(db, content)
   const blockInsert: Operation = db => insertHashedBlock(db, block)
 
-  const deletions: Operation[] = tablePairs
-    .map(pair =>
-      db => newQueryBuilder(db, pair[0])
+  const deletions: Operation[] = pendingTables
+    .map(table =>
+      db => newQueryBuilder(db, table)
         .delete()
         .where(`"hash" in (:...hashes)`, { hashes: hashes })
         .execute()
