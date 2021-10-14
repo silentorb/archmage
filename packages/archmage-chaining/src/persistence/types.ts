@@ -1,6 +1,5 @@
-import { Connection, ObjectType } from 'typeorm'
+import { Connection } from 'typeorm'
 
 export type Database = Connection
-export type Table<T> = ObjectType<T> // | EntitySchema<T>
-export type BaseRecord<T> = Omit<T, 'created' | 'modified' | 'deleted'>
-export type BaseHashRecord<T> = Omit<T, 'created' | 'modified' | 'deleted' | 'hash'>
+export type BaseRecord<T> = Omit<T, 'created'>
+export type BaseHashRecord<T> = Omit<T, 'created' | 'hash' | 'format'>

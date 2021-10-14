@@ -1,6 +1,7 @@
-import { chainingTables, Database } from 'archmage-chaining'
+import { Database, getManyBy, insertHashedRecord } from 'archmage-chaining'
 import { Connection, ConnectionOptions, createConnection, EntitySchema, LoggerOptions } from 'typeorm'
 import * as path from 'path'
+import { allEntities, PendingTransactions } from './schema'
 
 export function loadDotEnv() {
   require('dotenv').config({ path: path.resolve(__dirname, '../../../../.env') })
@@ -60,9 +61,12 @@ export async function initializeTestDatabase(entities: EntitySchema[]): Promise<
 
 /*** resetDatabase should never be used in production!!! ***/
 export async function resetDatabase(db: Connection) {
-  await clearDatabase(db, chainingTables)
+  await clearDatabase(db, allEntities)
 }
 
 export async function shutdownIntegrationTest(db: Database) {
   if (db) await db.close()
 }
+
+export const insertPendingTransaction = insertHashedRecord(PendingTransactions)
+export const getPendingTransactions = getManyBy(PendingTransactions)

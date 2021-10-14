@@ -1,10 +1,10 @@
 import { Hash } from '../common'
 
-export interface CommonBlock {
+export interface Block {
   hash: Hash
   format: number
-  index: number
-  items: Hash
+  number: number
+  content: Hash
   previous?: Hash
   timestamp: Date
 }

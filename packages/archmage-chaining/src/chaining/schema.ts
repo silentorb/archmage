@@ -1,5 +1,5 @@
 import { Column, ColumnOptions, CreateDateColumn, Entity, PrimaryColumn, ValueTransformer } from 'typeorm'
-import { CommonBlock } from './types'
+import { Block } from './types'
 import { DoNotHash } from './serialization'
 
 const smallInt: ColumnOptions = { type: 'smallint', unsigned: true }
@@ -24,7 +24,7 @@ const numeric: ColumnOptions = {
 export abstract class Created {
   @DoNotHash()
   @CreateDateColumn()
-  createdAt!: Date
+  created!: Date
 }
 
 export abstract class HashedTable extends Created {
@@ -45,12 +45,12 @@ export class HashLists extends Created {
 }
 
 @Entity()
-export abstract class Blocks extends HashedTable implements CommonBlock {
+export class Blocks extends HashedTable implements Block {
   @Column('integer')
-  index!: number
+  number!: number
 
   @Column()
-  items!: string // Hash
+  content!: string // Hash
 
   @Column({ nullable: true })
   previous?: string // Hash
@@ -59,6 +59,7 @@ export abstract class Blocks extends HashedTable implements CommonBlock {
   timestamp: Date
 }
 
-export const chainingTables: any[] = [
+export const chainingEntities: any[] = [
   Blocks,
+  HashLists,
 ]

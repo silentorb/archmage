@@ -1,10 +1,8 @@
 import { ObjectType } from 'typeorm'
 import { hashRecord } from './serialization'
-import { HashLists } from './tables'
-import { bufferFromStringArray, Hash, hashString } from '../common'
-import { Database, insertImmutable } from '../persistence'
-
-export type WithoutHash<T> = Omit<T, 'hash'>
+import { HashLists } from './schema'
+import { bufferFromStringArray, Hash, hashString, WithoutHash } from '../common'
+import { BaseHashRecord, Database, insertImmutable } from '../persistence'
 
 export function insertHashedRecords<T extends { hash: Hash }>(
   table: ObjectType<T>
@@ -17,7 +15,7 @@ export function insertHashedRecords<T extends { hash: Hash }>(
   }
 }
 
-export function insertHashedRecord<T>(table: ObjectType<T>): (db: Database, data: WithoutHash<T>) => Promise<T> {
+export function insertHashedRecord<T>(table: ObjectType<T>): (db: Database, data: BaseHashRecord<T>) => Promise<T> {
   const insert = insertHashedRecords(table)
   return async (db, data) => {
     const array = await insert(db, [data])
@@ -29,8 +27,7 @@ export function getListHash(items: Hash[]): string {
   return hashString(bufferFromStringArray(items.sort()))
 }
 
-export async function insertHashList(db: Database, items: Hash[]): Promise<Hash> {
-  const hash = getListHash(items)
+export async function insertHashListWithHash(db: Database, hash: Hash, items: Hash[]): Promise<Hash> {
   const inserts = items
     .map(itemHash => ({
       list: hash,
@@ -40,4 +37,9 @@ export async function insertHashList(db: Database, items: Hash[]): Promise<Hash>
   await insertImmutable<{ list: Hash; item: Hash }>(HashLists, db, inserts)
 
   return hash
+}
+
+export async function insertHashList(db: Database, items: Hash[]): Promise<Hash> {
+  const hash = getListHash(items)
+  return insertHashListWithHash(db, hash, items)
 }

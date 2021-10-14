@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "build": "./node_modules/.bin/tsc --build && node packages/archmage-chaining/post-build.js",
-    "start": "node modules/all/dist/entry/main"
+    "start": "node modules/all/dist/entry/main",
+    "publish": "cd dist/archmage-chaining && gitpkg publish"
   },
   "workspaces": [
     "packages/*"
