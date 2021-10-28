@@ -8,3 +8,7 @@ Created by Christopher W. Johnson
 * It provides the following features
   * Storing blockchains inside SQL tables
   * Hashing TypeORM entities
+
+## Documentation
+
+The documentation can be found [here](./docs/README.md).

@@ -1,17 +1,23 @@
 {
   "name": "archmage-persistence",
-  "version": "0.2.1",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Immutable record hashing, storage, and retrieval",
   "main": "src/index",
   "scripts": {
     "tsc": "node_modules/.bin/tsc",
-    "post-build": "node post-build.js"
+    "build": "yarn tsc & yarn post-build & yarn docs",
+    "post-build": "node post-build.js",
+    "docs": "node_modules/.bin/typedoc --options typedoc.json"
   },
   "private": true,
   "dependencies": {
-    "@types/node": "^16.10.1",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.2.37",
+    "typeorm": "^0.2.37"
+  },
+  "devDependencies": {
+    "@types/node": "^16.10.1",
+    "typedoc": "^0.22.7",
+    "typedoc-plugin-markdown": "^3.11.3",
     "typescript": "^4.4.3"
   }
 }

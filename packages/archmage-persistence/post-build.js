@@ -9,8 +9,10 @@ function copyFile(distPath, filename) {
 
 function main() {
   const packageJson = require(path.join(__dirname, 'package.json'))
-  const distPath = path.resolve(__dirname, "../../dist/archmage-chaining")
+  const distPath = path.resolve(__dirname, "../../dist/archmage-persistence")
   packageJson.main = "lib/index"
+  delete packageJson.scripts
+  delete packageJson.devDependencies
   const packageOutput = JSON.stringify(packageJson, undefined, 2)
   fs.writeFileSync(path.join(distPath, 'package.json'), packageOutput)
   copyFile(distPath, 'README.md')

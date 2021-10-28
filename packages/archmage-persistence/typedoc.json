@@ -1,0 +1,7 @@
+{
+  "entryPoints": ["src/index.ts"],
+  "out": "../../dist/archmage-persistence/docs",
+  "githubPages": false,
+  "readme": "none",
+  "plugin": "none"
+}
