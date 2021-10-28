@@ -7,13 +7,14 @@
     "tsc": "node_modules/.bin/tsc",
     "build": "yarn tsc & yarn post-build & yarn docs",
     "post-build": "node post-build.js",
-    "docs": "node_modules/.bin/typedoc --options typedoc.json"
+    "docs": "node_modules/.bin/typedoc --options typedoc.json",
+    "publish-ps": "cd ./../dist/archmage-persistence & gitpkg publish --registry $env:GITPKG_REGISTRY"
   },
-  "private": true,
   "dependencies": {
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.37"
   },
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^16.10.1",
     "typedoc": "^0.22.7",
