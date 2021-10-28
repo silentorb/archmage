@@ -1,19 +1,16 @@
-import { Blocks, HashedTable } from './schema'
-import { getListHash, insertHashedRecord, insertHashListWithHash } from './writing'
-import {
-  Database,
-  executeTransaction,
-  getManyBy,
-  insertMany,
-  insertSingle,
-  newQueryBuilder,
-  Operation,
-  queryStringValues
-} from '../persistence'
+
 import { ObjectType } from 'typeorm'
-import { Hash, WithoutHash } from '../common'
+import {
+  Database, executeTransaction, getListHash,
+  getManyBy, Hash,
+  HashedTable, hashRecord,
+  insertHashedRecord, insertHashListWithHash, insertMany,
+  insertSingle,
+  newQueryBuilder, Operation,
+  queryStringValues, WithoutHash
+} from 'archmage-persistence'
+import { Blocks } from './schema'
 import { Block } from './types'
-import { hashRecord } from './serialization'
 
 export const insertBlock = insertHashedRecord(Blocks)
 export const insertHashedBlock = insertSingle(Blocks)

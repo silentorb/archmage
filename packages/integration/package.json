@@ -9,7 +9,8 @@
   "private": true,
   "dependencies": {
     "@types/node": "^16.10.1",
-    "archmage-chaining": "^0.2.0"
+    "archmage-chaining": "*",
+    "archmage-persistence": "*"
   },
   "devDependencies": {
     "@types/chai": "^4.2.22",

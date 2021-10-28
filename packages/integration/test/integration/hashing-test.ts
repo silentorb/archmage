@@ -1,5 +1,6 @@
 import { assert } from 'chai'
-import { Blocks, Database, emptyArrayHash, hashRecord } from 'archmage-chaining'
+import { Blocks } from 'archmage-chaining'
+import { Database, emptyArrayHash, hashRecord } from 'archmage-persistence'
 import { allEntities, initializeTestDatabaseConnection, loadDotEnv, shutdownIntegrationTest } from '../src'
 
 describe('chaining-test', function () {

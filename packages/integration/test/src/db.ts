@@ -1,4 +1,4 @@
-import { Database, getManyBy, insertHashedRecord } from 'archmage-chaining'
+import { Database, getManyBy, insertHashedRecord } from 'archmage-persistence'
 import { Connection, ConnectionOptions, createConnection, EntitySchema, LoggerOptions } from 'typeorm'
 import * as path from 'path'
 import { allEntities, PendingTransactions } from './schema'

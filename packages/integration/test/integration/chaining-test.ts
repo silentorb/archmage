@@ -1,12 +1,6 @@
 import { assert } from 'chai'
-import {
-  Database,
-  emptyArrayHash,
-  getBlocksBy,
-  getHashListItems,
-  getManyBy, HashLists,
-  integratePendingItems
-} from 'archmage-chaining'
+import { getBlocksBy, integratePendingItems } from 'archmage-chaining'
+import { Database, emptyArrayHash, getManyBy, HashLists, } from 'archmage-persistence'
 import {
   allEntities,
   getPendingTransactions,
@@ -15,7 +9,8 @@ import {
   loadDotEnv,
   PendingTransactions,
   resetDatabase,
-  shutdownIntegrationTest, Transactions
+  shutdownIntegrationTest,
+  Transactions
 } from '../src'
 
 describe('chaining-test', function () {

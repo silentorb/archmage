@@ -1,4 +1,4 @@
-import { Hash } from '../common'
+import { Hash } from 'archmage-persistence'
 
 export interface Block {
   hash: Hash

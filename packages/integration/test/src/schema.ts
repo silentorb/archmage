@@ -1,5 +1,6 @@
-import { chainingEntities, HashedTable } from 'archmage-chaining'
+import { chainingEntities } from 'archmage-chaining'
 import { Column, Entity } from 'typeorm'
+import { HashedTable } from 'archmage-persistence'
 
 @Entity()
 export class Transactions extends HashedTable {
