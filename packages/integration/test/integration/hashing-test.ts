@@ -1,7 +1,13 @@
 import { assert } from 'chai'
 import { Blocks } from 'archmage-chaining'
-import { Database, emptyArrayHash, hashRecord } from 'archmage-persistence'
-import { allEntities, initializeTestDatabaseConnection, loadDotEnv, shutdownIntegrationTest } from '../src'
+import { Database, emptyArrayHash, getManyBy, HashLists, hashRecord, insertHashList } from 'archmage-persistence'
+import {
+  allEntities,
+  initializeTestDatabaseConnection,
+  loadDotEnv,
+  resetDatabase,
+  shutdownIntegrationTest
+} from '../src'
 
 describe('chaining-test', function () {
   this.timeout(15000)
@@ -27,8 +33,8 @@ describe('chaining-test', function () {
       const block2 = { ...block1, number: 1 }
       const hash1 = hashRecord(Blocks)(db)(block1)
       const hash2 = hashRecord(Blocks)(db)(block2)
-      assert.strictEqual(hash1, '6080251edbba3d5679cd3ba0c5f891b3')
-      assert.strictEqual(hash2, '5ab3432861123762120c9e7b43c00263')
+      assert.strictEqual(hash1, 'f65743962f612b6d60dffa2cda16cef3')
+      assert.strictEqual(hash2, 'b617ce5df2ac9c291c385dce652ae404')
     })
   })
 

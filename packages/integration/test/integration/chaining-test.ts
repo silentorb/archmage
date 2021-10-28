@@ -1,6 +1,6 @@
 import { assert } from 'chai'
 import { getBlocksBy, integratePendingItems } from 'archmage-chaining'
-import { Database, emptyArrayHash, getManyBy, HashLists, } from 'archmage-persistence'
+import { Database, getManyBy, HashLists, } from 'archmage-persistence'
 import {
   allEntities,
   getPendingTransactions,
@@ -35,12 +35,6 @@ describe('chaining-test', function () {
     it('can integrate queued content', async function () {
       const transaction1 = await insertPendingTransaction(db, { value: 10 })
       const transaction2 = await insertPendingTransaction(db, { value: 25 })
-      const block = {
-        index: 0,
-        content: emptyArrayHash,
-        previous: undefined,
-        timestamp: new Date(1634051175285)
-      }
       await integratePendingItems(db, [[PendingTransactions, Transactions]])
 
       const remainingPendingTransactions = await getPendingTransactions(db)
