@@ -15,11 +15,12 @@
   "devDependencies": {
     "@types/chai": "^4.2.22",
     "@types/mocha": "^9.0.0",
+    "axios": "^0.24.0",
     "chai": "^4.3.4",
     "mocha": "^9.1.2",
     "nyc": "^15.1.0",
     "pg": "^8.7.1",
-    "typescript": "^4.4.3",
-    "ts-node": "^10.3.0"
+    "ts-node": "^10.3.0",
+    "typescript": "^4.4.3"
   }
 }

@@ -1,14 +1,13 @@
 {
   "name": "archmage-persistence",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Immutable record hashing, storage, and retrieval",
   "main": "src/index",
   "scripts": {
     "tsc": "node_modules/.bin/tsc",
     "build": "yarn tsc & yarn post-build & yarn docs",
     "post-build": "node post-build.js",
-    "docs": "node_modules/.bin/typedoc --options typedoc.json",
-    "publish-ps": "cd ./../dist/archmage-persistence & gitpkg publish --registry $env:GITPKG_REGISTRY"
+    "docs": "node_modules/.bin/typedoc --options typedoc.json"
   },
   "dependencies": {
     "reflect-metadata": "^0.1.13",
