@@ -4,6 +4,15 @@ import * as https from 'https'
 import * as fs from 'fs'
 import * as Buffer from 'buffer'
 
+/*
+The certificates in this test were generated with OpenSSL such as:
+
+openssl req -x509 -newkey rsa:4096 -keyout server-key.pem -out server-cert.pem -days 365 -nodes
+
+With CN set to 127.0.0.1
+
+ */
+
 const axios = require('axios')
 
 const host = '127.0.0.1'
