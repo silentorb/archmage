@@ -1,7 +1,8 @@
 import { assert } from 'chai'
 import { loadDotEnv } from '../src'
-import { loadCert, startTestServer } from '../src/test-server'
 import * as https from 'https'
+import * as fs from 'fs'
+import * as Buffer from 'buffer'
 
 const axios = require('axios')
 
@@ -12,6 +13,25 @@ const serverCert = loadCert('server-cert.pem')
 const client1Cert = loadCert('client1-cert.pem')
 const client2Cert = loadCert('client2-cert.pem')
 const client3Cert = loadCert('client3-cert.pem')
+
+export function loadCert(filename: string): Buffer {
+  return fs.readFileSync(`test/certs/${filename}`)
+}
+
+export async function startTestServer(host: string, port: number, options: any) {
+  return new Promise<any>((resolve, reject) => {
+    const server = https.createServer(options, (req, res) => {
+      res.statusCode = 200
+      res.setHeader('Content-Type', 'text/plain')
+      res.end('Hello World')
+    })
+
+    server.listen(port, host, () => {
+      console.log(`Server running at http://${host}:${port}/`)
+      resolve(server)
+    })
+  })
+}
 
 export async function authRequest(httpsAgent: https.Agent) {
   try {
@@ -29,10 +49,10 @@ export async function authRequest(httpsAgent: https.Agent) {
 export function newClientAgent(cert: Buffer | string, key: Buffer | string) {
   return new https.Agent({
     keepAlive: true,
-    ca: serverCert,
-    cert,
-    key,
-    // I don't know why this is needing to be overridden when the host matches the cert CN
+    ca: serverCert, // The authorized server certificate
+    cert, // The client certificate
+    key, // the client certificate private key
+    // CJ: I don't know why this is needing to be overridden even when the host matches the cert CN
     checkServerIdentity: function (host, cert) {
       return host === cert.subject.CN ? undefined : Error('Invalid server host for TLS certificate')
     }
@@ -47,11 +67,11 @@ describe('auth-test', function () {
     loadDotEnv()
 
     const serverOptions = {
-      ca: [client1Cert, client2Cert],
-      requestCert: true,
+      ca: [client1Cert, client2Cert], // The list of authorized client certificates
+      requestCert: true, // This is required for authenticating clients
       cert: serverCert,
-      servername: '127.0.0.1',
       key: loadCert('server-key.pem'),
+      servername: '127.0.0.1',
     }
     server = await startTestServer(host, port, serverOptions)
   })
@@ -62,6 +82,9 @@ describe('auth-test', function () {
 
   describe('tls authentication', function () {
     it('works', async function () {
+      // The first two agents use authorized certificates
+      // while the third agent uses a certificate that is valid but not included in the server's `ca` configuration
+
       const agent1 = newClientAgent(client1Cert, loadCert('client1-key.pem'))
       const agent2 = newClientAgent(client2Cert, loadCert('client2-key.pem'))
       const agent3 = newClientAgent(client3Cert, loadCert('client3-key.pem'))
@@ -75,5 +98,4 @@ describe('auth-test', function () {
       assert.isTrue(response3.isError)
     })
   })
-
 })
