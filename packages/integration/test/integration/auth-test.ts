@@ -61,9 +61,12 @@ export function newClientAgent(cert: Buffer | string, key: Buffer | string) {
     ca: serverCert, // The authorized server certificate
     cert, // The client certificate
     key, // the client certificate private key
-    // CJ: I don't know why this is needing to be overridden even when the host matches the cert CN
+    // CJ: I don't know why this is needing to be
+    // overridden even when the host matches the cert CN
     checkServerIdentity: function (host, cert) {
-      return host === cert.subject.CN ? undefined : Error('Invalid server host for TLS certificate')
+      return host === cert.subject.CN
+        ? undefined
+        : Error('Invalid server host for TLS certificate')
     }
   })
 }
@@ -92,7 +95,8 @@ describe('auth-test', function () {
   describe('tls authentication', function () {
     it('works', async function () {
       // The first two agents use authorized certificates
-      // while the third agent uses a certificate that is valid but not included in the server's `ca` configuration
+      // while the third agent uses a certificate that is
+      // valid but not included in the server's `ca` configuration
 
       const agent1 = newClientAgent(client1Cert, loadCert('client1-key.pem'))
       const agent2 = newClientAgent(client2Cert, loadCert('client2-key.pem'))
